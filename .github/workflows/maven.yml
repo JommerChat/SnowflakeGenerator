@@ -56,4 +56,4 @@ jobs:
             docker container stop parlantos-snowflake
             docker rm parlantos-snowflake
             docker pull ${{ secrets.DOCKER_REPO }}:latest
-            docker run -d -p 8080:8080 --name parlantos-snowflake ${{ secrets.DOCKER_REPO }}:latest
+            docker run -d -p 8080:8080 --name parlantos-snowflake --restart unless-stopped ${{ secrets.DOCKER_REPO }}:latest
