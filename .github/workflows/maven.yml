@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Login to Docker Registry
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} registry.parlantos.com
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} registry.jommer.chat
       - name: Build Container image
         run: >
           docker build -t ${{ secrets.DOCKER_REPO }}:latest .
@@ -52,8 +52,8 @@ jobs:
           key: ${{ secrets.CICD_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} registry.parlantos.com
-            docker container stop parlantos-snowflake
-            docker rm parlantos-snowflake
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} registry.jommer.chat
+            docker container stop jommer-snowflake
+            docker rm jommer-snowflake
             docker pull ${{ secrets.DOCKER_REPO }}:latest
-            docker run -d -p 8080:8080 --name parlantos-snowflake --restart unless-stopped ${{ secrets.DOCKER_REPO }}:latest
+            docker run -d -p 8080:8080 --name jommer-snowflake --restart unless-stopped ${{ secrets.DOCKER_REPO }}:latest
